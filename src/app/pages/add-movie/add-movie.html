@@ -1,0 +1,73 @@
+<h2>Додати фільм</h2>
+
+<form #itemForm="ngForm" (ngSubmit)="addItem(itemForm)">
+
+  <label for="title">Назва фільму</label>
+  <input
+    id="title"
+    name="title"
+    [(ngModel)]="movie.title"
+    #titleRef="ngModel"
+    required
+    minlength="3"
+    maxlength="50"
+  >
+
+  @if (submitted && titleRef.invalid) {
+    @if (titleRef.errors?.['required']) {
+      <small>Введіть назву фільму.</small>
+    }
+    @if (titleRef.errors?.['minlength']) {
+      <small>Назва повинна містити мінімум 3 символи.</small>
+    }
+    @if (titleRef.errors?.['maxlength']) {
+      <small>Назва повинна містити максимум 50 символів.</small>
+    }
+  }
+
+  <label for="director">Режисер</label>
+  <input
+    id="director"
+    name="director"
+    [(ngModel)]="movie.director"
+    #directorRef="ngModel"
+    required
+    minlength="3"
+    maxlength="50"
+  >
+
+  @if (submitted && directorRef.invalid) {
+    @if (directorRef.errors?.['required']) {
+      <small>Введіть ім'я режисера.</small>
+    }
+    @if (directorRef.errors?.['minlength']) {
+      <small>Ім'я режисера повинно містити мінімум 3 символи.</small>
+    }
+    @if (directorRef.errors?.['maxlength']) {
+      <small>Ім'я режисера повинно містити максимум 50 символів.</small>
+    }
+  }
+
+  <label for="description">Опис</label>
+  <textarea
+    id="description"
+    name="description"
+    [(ngModel)]="movie.description"
+    #descriptionRef="ngModel"
+    required
+    minlength="10"
+  ></textarea>
+
+  @if (submitted && descriptionRef.invalid) {
+    @if (descriptionRef.errors?.['required']) {
+      <small>Введіть опис фільму.</small>
+    }
+    @if (descriptionRef.errors?.['minlength']) {
+      <small>Опис повинен містити мінімум 10 символів.</small>
+    }
+  }
+
+  <button type="submit">Додати фільм</button>
+</form>
+
+<a routerLink="/movies">Назад до списку</a>
